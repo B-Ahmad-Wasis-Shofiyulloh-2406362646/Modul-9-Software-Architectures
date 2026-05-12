@@ -3,6 +3,7 @@ use lapin::{
     Connection, ConnectionProperties,
 };
 use futures_util::StreamExt;
+use std::time::Duration;
 
 #[derive(Debug, Clone, BorshDeserialize, BorshSerialize)]
 pub struct UserCreatedEventMessage {
@@ -50,6 +51,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         match UserCreatedEventMessage::try_from_slice(&delivery.data) {
             Ok(message) => {
                 println!("In Wasis's Computer [2406362646]. Message received: {:?}", message);
+                let ten_millis = Duration::from_millis(1000);
+                tokio::time::sleep(ten_millis).await;
             }
             Err(e) => {
                 println!("Failed to deserialize message: {:?}", e);

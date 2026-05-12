@@ -29,3 +29,7 @@ Publisher mengirimkan pesan event ke RabbitMQ dengan merangkaian data pengguna m
 ## Monitoring Chart based on Publisher
 ![Monitoring](assets/images/monitoring-publisher.png)
 Spike yang terlihat pada grafik monitoring RabbitMQ menunjukkan lonjakan jumlah pesan saat publisher menjalankan `publish_event` lima kali berturut-turut, menyebabkan lima pesan masuk ke queue `user_created` dalam waktu singkat.
+
+## Simulation Slow Subscriber
+![Slow](assets/images/slow-subscriber.png)
+Jumlah antrian pesan mencapai 11 karena ketika publisher menjalankan `cargo run` tiga kali berturut-turut dengan cepat (mengirim 5 pesan per run = 15 pesan total), subscriber yang memiliki delay 1 detik per pesan tidak dapat memproses pesan secepat publisher mengirimkannya, sehingga pesan-pesan menumpuk di queue RabbitMQ.
