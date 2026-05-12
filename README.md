@@ -33,3 +33,17 @@ Spike yang terlihat pada grafik monitoring RabbitMQ menunjukkan lonjakan jumlah 
 ## Simulation Slow Subscriber
 ![Slow](assets/images/slow-subscriber.png)
 Jumlah antrian pesan mencapai 11 karena ketika publisher menjalankan `cargo run` tiga kali berturut-turut dengan cepat (mengirim 5 pesan per run = 15 pesan total), subscriber yang memiliki delay 1 detik per pesan tidak dapat memproses pesan secepat publisher mengirimkannya, sehingga pesan-pesan menumpuk di queue RabbitMQ.
+
+## Running 3 Subscriber
+![Rabbit3Subscriber](assets/images/rabbit-3-subscriber.png)
+![3Subscriber](assets/images/3-subscriber.png)
+Spike pada message queue berkurang lebih cepat karena ketiga subscriber berjalan secara bersamaan dan memproses pesan secara paralel, sehingga throughput konsumsi pesan meningkat tiga kali lipat (dari 1 pesan/detik menjadi 3 pesan/detik), memungkinkan antrian di RabbitMQ dikosongkan lebih cepat.
+
+## Reflection
+
+Tutorial ini mendemonstrasikan arsitektur event-driven yang fundamental. Publisher dan Subscriber ter decouple melalui message broker, memungkinkan sistem untuk berskala secara horizontal dengan menambah jumlah consumer tanpa mengubah producer. Dari aspek improvement, beberapa hal dapat diperbaiki pada kode yang ada: 
+1. Mengeluarkan hardcoded values seperti connection string dan delay time ke environment variables atau config file. 
+2. Menambahkan error handling yang lebih robust dengan logging yang informatif. 
+3. Menggunakan connection pooling atau persistent connection untuk mengurangi overhead.
+4. Mengganti consumer tag yang sama ("subscriber") untuk semua instance dengan unique identifier agar lebih mudah di-monitor. 
+5. Mempertimbangkan batch processing atau message prefetch settings untuk optimasi throughput.
