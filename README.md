@@ -25,3 +25,7 @@ Ya, publisher dan subscriber menggunakan URL yang sama, artinya keduanya terhubu
 ![Subscriber](assets/images/send-process-subscriber.png)
 ![Publisher](assets/images/send-process-publisher.png)
 Publisher mengirimkan pesan event ke RabbitMQ dengan merangkaian data pengguna menggunakan Borsh dan mempublikasikannya ke queue user_created. Sementara itu, Subscriber mendengarkan dan mengonsumsi pesan dari queue yang sama, kemudian mendeserialisasi data untuk memproses setiap event pengguna yang diterima.
+
+## Monitoring Chart based on Publisher
+![Monitoring](assets/images/monitoring-publisher.png)
+Spike yang terlihat pada grafik monitoring RabbitMQ menunjukkan lonjakan jumlah pesan saat publisher menjalankan `publish_event` lima kali berturut-turut, menyebabkan lima pesan masuk ke queue `user_created` dalam waktu singkat.
