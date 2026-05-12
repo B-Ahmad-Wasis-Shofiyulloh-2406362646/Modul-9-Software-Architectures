@@ -14,7 +14,9 @@ Dalam connection string `amqp://guest:guest@localhost:5672`, "guest" yang pertam
 
 Program `publisher` di folder `publisher` memanggil `publish_event` sebanyak lima kali, jadi dalam satu run ia mengirim tepat lima pesan `UserCreatedEventMessage`. Setiap pesan berisi `user_id` dan `user_name`; ukuran serialisasi tiap pesan bergantung pada panjang string (umumnya beberapa puluh sampai beberapa ratus byte), sehingga total data kira-kira 5 × ukuran_per_pesan.
 
-subscriber, apa maknanya?**
-Ya — publisher dan subscriber menggunakan URL yang sama, artinya keduanya terhubung ke message broker yang sama (`localhost` pada port `5672`) dengan kredensial yang sama (`guest` sebagai username dan `guest` sebagai password), sehingga pesan yang dipublikasikan oleh publisher tersedia bagi subscriber yang juga terhubung ke broker itu.
+Ya, publisher dan subscriber menggunakan URL yang sama, artinya keduanya terhubung ke message broker yang sama (`localhost` pada port `5672`) dengan kredensial yang sama (`guest` sebagai username dan `guest` sebagai password), sehingga pesan yang dipublikasikan oleh publisher tersedia bagi subscriber yang juga terhubung ke broker itu.
 
 </details>
+
+## RabbitMQ Running
+![RabbitMQ Running](assets/images/rabbitmq-running.png)
