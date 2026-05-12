@@ -20,3 +20,8 @@ Ya, publisher dan subscriber menggunakan URL yang sama, artinya keduanya terhubu
 
 ## RabbitMQ Running
 ![RabbitMQ Running](assets/images/rabbitmq-running.png)
+
+## Sending and Processing Event
+![Subscriber](assets/images/send-process-subscriber.png)
+![Publisher](assets/images/send-process-publisher.png)
+Publisher mengirimkan pesan event ke RabbitMQ dengan merangkaian data pengguna menggunakan Borsh dan mempublikasikannya ke queue user_created. Sementara itu, Subscriber mendengarkan dan mengonsumsi pesan dari queue yang sama, kemudian mendeserialisasi data untuk memproses setiap event pengguna yang diterima.
