@@ -8,3 +8,13 @@ AMQP (Advanced Message Queuing Protocol) adalah protokol standar yang digunakan 
 Dalam connection string `amqp://guest:guest@localhost:5672`, "guest" yang pertama adalah username untuk autentikasi ke message broker, "guest" yang kedua adalah password untuk login, sedangkan `localhost:5672` merupakan alamat host dan port di mana message broker (biasanya RabbitMQ) berjalan, dengan 5672 sebagai port default AMQP.
 
 </details>
+
+<details>
+<summary>Publisher</summary>
+
+Program `publisher` di folder `publisher` memanggil `publish_event` sebanyak lima kali, jadi dalam satu run ia mengirim tepat lima pesan `UserCreatedEventMessage`. Setiap pesan berisi `user_id` dan `user_name`; ukuran serialisasi tiap pesan bergantung pada panjang string (umumnya beberapa puluh sampai beberapa ratus byte), sehingga total data kira-kira 5 × ukuran_per_pesan.
+
+subscriber, apa maknanya?**
+Ya — publisher dan subscriber menggunakan URL yang sama, artinya keduanya terhubung ke message broker yang sama (`localhost` pada port `5672`) dengan kredensial yang sama (`guest` sebagai username dan `guest` sebagai password), sehingga pesan yang dipublikasikan oleh publisher tersedia bagi subscriber yang juga terhubung ke broker itu.
+
+</details>
